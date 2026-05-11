@@ -40,7 +40,8 @@ class Config:
         
         # 评论功能开关（默认开启，设置 NS_COMMENT=false 可关闭）
         ns_comment_env = os.environ.get("NS_COMMENT", "")
-        self.enable_comment = (ns_comment_env.lower() != "false") if ns_comment_env else True
+        # self.enable_comment = (ns_comment_env.lower() != "false") if ns_comment_env else True
+        self.enable_comment = false
         
         # 评论区域配置（处理空字符串）
         comment_url_env = os.environ.get("NS_COMMENT_URL", "") or ""
