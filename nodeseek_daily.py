@@ -679,7 +679,8 @@ def run_for_account(cookie_str, account_index):
         
         # 执行评论任务（可通过 NS_COMMENT=true 开启）
         if config.enable_comment:
-            result["comments"] = nodeseek_comment(driver)
+            # result["comments"] = nodeseek_comment(driver)
+            print("评论功能已关闭 ")
         else:
             print("评论功能已关闭 (NS_COMMENT 未设置或不为 true)")
         
