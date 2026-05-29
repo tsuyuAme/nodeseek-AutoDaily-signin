@@ -206,7 +206,7 @@ def check_login_status(driver):
         # elif len(personal_elements) > 0 and len(login_buttons) == 0:
         #     print("登录状态有效 (通过个人中心检测)")
         #     return True
-         if len(user_elements) > 0 and len(personal_name) > 0:
+        if len(user_elements) > 0 and len(personal_name) > 0:
             print("登录状态有效 (通过头像及用户名检测)")
             return True
         else:
