@@ -194,14 +194,20 @@ def check_login_status(driver):
         
         # 方式3: 检查是否存在个人中心相关链接（登录后才有）
         personal_elements = driver.find_elements(By.XPATH, "//*[contains(text(), '个人中心') or contains(text(), '消息') or contains(@href, '/user/')]")
+
+        # 方式4: 直接获取用户名
+        personal_name = driver.find_elements(By.XPATH, "//span[contains(text(), '凪鮫')] | //a[contains(text(), '凪鮫')] | //span[contains(text(), '鮭茶漬')] | //a[contains(text(), '鮭茶漬')]")
         
-        print(f"检测结果: 头像={len(user_elements)}, 登录按钮={len(login_buttons)}, 个人中心={len(personal_elements)}")
+        print(f"检测结果: 头像={len(user_elements)}, 登录按钮={len(login_buttons)}, 个人中心={len(personal_elements)}，用户名={len(personal_name)}")
         
-        if len(user_elements) > 0 and len(login_buttons) == 0:
-            print("登录状态有效 (通过头像检测)")
-            return True
-        elif len(personal_elements) > 0 and len(login_buttons) == 0:
-            print("登录状态有效 (通过个人中心检测)")
+        # if len(user_elements) > 0 and len(login_buttons) == 0:
+        #     print("登录状态有效 (通过头像检测)")
+        #     return True
+        # elif len(personal_elements) > 0 and len(login_buttons) == 0:
+        #     print("登录状态有效 (通过个人中心检测)")
+        #     return True
+         if len(user_elements) > 0 and len(personal_name) > 0:
+            print("登录状态有效 (通过头像及用户名检测)")
             return True
         else:
             print("Cookie 已过期或未登录")
@@ -213,6 +219,7 @@ def check_login_status(driver):
             except:
                 pass
             return False
+        
     except Exception as e:
         print(f"检测登录状态时出错: {str(e)}")
         return False
