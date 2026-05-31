@@ -206,7 +206,7 @@ def check_login_status(driver):
             temp = f"//a[contains(text(), '{name}')]"
             name_arr.append(temp)
         name_str = " | ".join(name_arr)
-        print(name_str)
+        # print(name_str)
         personal_name = driver.find_elements(By.XPATH, name_str)
         
         print(f"检测结果: 头像={len(user_elements)}, 登录按钮={len(login_buttons)}, 个人中心={len(personal_elements)}，用户名={len(personal_name)}")
