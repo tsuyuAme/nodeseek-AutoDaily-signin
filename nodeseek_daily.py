@@ -201,13 +201,13 @@ def check_login_status(driver):
         personal_elements = driver.find_elements(By.XPATH, "//*[contains(text(), '个人中心') or contains(text(), '消息') or contains(@href, '/user/')]")
 
         # 方式4: 直接获取用户名
-        arr = []
+        name_arr = []
         for i, name in enumerate(config.names):
             temp = f"//a[contains(text(), '{name}')]"
-            arr.append(temp)
-        string = " | ".join(string)
-        print(string)
-        personal_name = driver.find_elements(By.XPATH, string)
+            name_arr.append(temp)
+        name_str = " | ".join(name_arr)
+        print(name_str)
+        personal_name = driver.find_elements(By.XPATH, name_str)
         
         print(f"检测结果: 头像={len(user_elements)}, 登录按钮={len(login_buttons)}, 个人中心={len(personal_elements)}，用户名={len(personal_name)}")
         
