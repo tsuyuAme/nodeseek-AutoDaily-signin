@@ -53,6 +53,11 @@ class Config:
         delay_max_str = os.environ.get("NS_DELAY_MAX", "") or "10"
         self.delay_min = int(delay_min_str)
         self.delay_max = int(delay_max_str)
+
+        # 用户名
+        name_env = os.environ.get("NS_NAME", "") or ""
+        self.names = [c.strip() for c in name_env.split("|") if c.strip()]
+
     
     @property
     def account_count(self):
@@ -196,7 +201,11 @@ def check_login_status(driver):
         personal_elements = driver.find_elements(By.XPATH, "//*[contains(text(), '个人中心') or contains(text(), '消息') or contains(@href, '/user/')]")
 
         # 方式4: 直接获取用户名
-        personal_name = driver.find_elements(By.XPATH, "//span[contains(text(), '凪鮫')] | //a[contains(text(), '凪鮫')] | //span[contains(text(), '鮭茶漬')] | //a[contains(text(), '鮭茶漬')]")
+        string = []
+        for i, name in enumerate(config.names):
+            temp = f"//a[contains(text(), {name})]"
+            string.append(temp)
+        personal_name = driver.find_elements(By.XPATH, " | ".join(string))
         
         print(f"检测结果: 头像={len(user_elements)}, 登录按钮={len(login_buttons)}, 个人中心={len(personal_elements)}，用户名={len(personal_name)}")
         
